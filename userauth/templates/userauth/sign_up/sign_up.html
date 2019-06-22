@@ -1,0 +1,31 @@
+{% extends 'base_layout.html'%}
+{%block script%}
+
+{%endblock%}
+
+{% block title%}problems{%endblock%}
+
+
+
+{% block content%}
+<h1>회원 가입</h1>
+<div class="content">
+    <li class="type">
+        <ul>
+            <div class="korea">
+                <a href="{%url 'userauth:korea' %}">고려대학교 학생</a>
+            </div>
+        </ul>
+        <ul>
+            <div class="yonsei">
+                <a href="{%url 'userauth:yonsei' %}">연세대학교 학생</a>
+            </div>
+        </ul>
+        <ul>
+            <div class="others">
+                <a href="{%url 'userauth:others' %}">일반인</a>
+            </div>
+        </ul>
+    </li>
+</div>
+{%endblock%}

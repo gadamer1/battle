@@ -1,0 +1,55 @@
+{% extends 'base_layout.html' %}
+
+{%load static%}
+
+{%block script%}
+
+{%endblock%}
+
+{% block title%}ranking{%endblock%}
+
+
+
+{% block content%}
+
+<div class="content">
+    <h1>랭킹</h1>
+    <li class="rank">
+        <p class="korea">고려대
+        <ul>총 점수:{{koreapoints}}</ul>
+        <ul>문제 점수:{{p_koreapoints}}</ul>
+        <ul>던전 점수:{{d_koreapoints}}</ul>
+        <li class="ranker">
+            고려대 문제 분야 랭커
+            {% for ranker in p_korea_ranker%}
+            <ul>{{ranker.user}} : {{ranker.problems_point}}</ul>
+            {% endfor%}
+        </li>
+        <li class="ranker rank">
+            고려대 던전 분야 랭커
+            {% for ranker in d_korea_ranker%}
+            <ul>{{ranker.user}} : {{ranker.dungeon_point}}</ul>
+            {% endfor%}
+        </li>
+        </p>
+
+        <p class="yonsei">연세대
+                <ul>총 점수:{{yonseipoints}}</ul>
+                <ul>문제 점수:{{p_yonseipoints}}</ul>
+                <ul>던전 점수:{{d_yonseipoints}}</ul>
+                <li class="ranker">
+                    연세대 문제 분야 랭커
+                    {% for ranker in p_yonsei_ranker%}
+                    <ul>{{ranker.user}} : {{ranker.problems_point}}</ul>
+                    {% endfor%}
+                </li>
+                <li class="ranker rank">
+                    연세대 던전 분야 랭커
+                    {% for ranker in d_yonsei_ranker%}
+                    <ul>{{ranker.user}} : {{ranker.dungeon_point}}</ul>
+                    {% endfor%}
+                </li>
+                </p>
+    </li>
+</div>
+{%endblock%}

@@ -1,0 +1,48 @@
+{% extends 'base_layout.html' %}
+
+{%load static%}
+
+{%block script%}
+
+{%endblock%}
+
+{% block title%}main{%endblock%}
+{% block header%}
+<div class="header">
+    <nav>
+
+    </nav>
+</div>
+{%endblock%}
+{% block content%}
+
+<div class="content">
+    <div class="games">
+        <div class="problems">
+            <li class="problems">        
+            <a href="{%url 'mainapp:problems_list' %}">문제들을 풀어봐요</a>
+            <form action="{%url 'mainapp:main'%}" method="POST">
+            <a href="https://gadamer1.pythonanywhere.com">던전을 빨리 클리어해주세요</a>
+            <p>보물코드 입력시 200p 획득</p>
+            {%csrf_token%}
+            {{form}}
+            <input type="submit" value="확인">
+            </form>
+            {% if flag %}
+            <div id="some_flag" title="Some Flag">
+                <p>틀렸습니다</p>
+            </div>
+            {% endif %}
+            </li>
+            </div>
+            {% if alert%}
+            <div class="alert">
+                <p>두번 이상은 문제를 풀 수 없습니다.</p>
+            </div>
+            {% endif%}
+            </li>
+        </div>
+    </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,25 @@
+{% extends 'base_layout.html'%}
+{%block script%}
+
+{%endblock%}
+
+{% block title%}problems{%endblock%}
+
+
+
+{% block content%}
+
+<div class="content">
+    <div class="content">
+            <h1>연세대학생 회원가입</h1>
+            <p>포탈 이메일을 꼭 써주세요</p>
+        <div class="signup form">
+            <form action="{%url 'userauth:yonsei'%}" method="POST">
+                {%csrf_token%}
+                {{form}}
+                <input type="submit" value="확인">
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

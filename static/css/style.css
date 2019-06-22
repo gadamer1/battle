@@ -1,0 +1,15 @@
+nav{
+    background-color: salmon;
+    margin: 0 auto;
+    padding: 10px 10px;
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+li {
+    display: inline-block;
+}
+ul {
+    display: inline;
+}

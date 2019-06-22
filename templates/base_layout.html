@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        {%block script%} {%endblock%}
+        <link rel="stylesheet" href="{%static 'css/style.css/'%}" type="text/css">
+        <title>{%block title%}{% endblock%}</title>
+    </head>
+
+    <body>
+        <div class="header">
+            <nav>
+                <img src="{%static 'img/logo.png'%}" alt="사이버고연전">
+                <li>
+                    <ul><a href="{%url 'mainapp:main'%}">홈</a></ul>
+                    {% if user.is_authenticated%}
+                    <ul><a href="{%url 'userauth:mypage' %}">마이페이지</a></ul>
+                    <ul><a href="{%url 'userauth:logout'%}">로그아웃</a></ul>
+                    {% else%}
+                    <ul><a href="{% url 'userauth:login'%}">로그인</a></ul>
+                    <ul><a href="{%url 'userauth:signup'%}">회원가입</a></ul>
+                    {%endif%}
+                    <ul><a href="{%url 'mainapp:ranking' %}">랭킹</a></ul>
+                </li>
+            </nav>
+        </div>
+
+        {%block content%}{%endblock%}
+
+        <footer>
+            <div class="footer">
+                <pre>
+                    devkor 화이팅
+                </pre>
+            </div>
+        </footer>
+    </body>
+</html>

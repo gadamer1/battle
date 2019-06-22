@@ -1,0 +1,39 @@
+{% extends 'base_layout.html' %}
+
+{%load static%}
+
+{%block script%}
+
+{%endblock%}
+
+{% block title%}problems{%endblock%}
+
+
+
+{% block content%}
+
+<div class="content">
+    <div class="problem">
+    <li>
+    <ul>{{problems.img}}</ul>
+    <ul>문제 점수:{{problems.points}}p</ul>
+    <ul><form action="{%url 'mainapp:problems' problems.slug%}" method="POST">
+        {%csrf_token%}
+        {{form}}
+        <input type="submit" value="확인">
+    </form></ul>
+    {% if flag %}
+    <div id="some_flag" title="Some Flag">
+        <p>틀렸습니다</p>
+    </div>
+    {% endif %}
+    </li>
+    </div>
+    {% if alert%}
+    <div class="alert">
+        <p>두번 이상은 문제를 풀 수 없습니다.</p>
+    </div>
+    {% endif%}
+
+</div>
+{%endblock%}

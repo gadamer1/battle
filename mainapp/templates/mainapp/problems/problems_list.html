@@ -1,0 +1,20 @@
+{% extends 'base_layout.html' %}
+
+{%load static%}
+
+{%block script%}
+
+{%endblock%}
+
+{% block title%}problems list{%endblock%}
+
+
+
+{% block content%}
+
+<div class="content">
+    {% for problem in problems %}
+    <a href="{%url 'mainapp:problems' problem.slug %}">{{problem.name}}</a>
+    {%endfor%}
+</div>
+{%endblock%}

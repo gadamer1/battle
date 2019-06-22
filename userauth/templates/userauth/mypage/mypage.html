@@ -1,0 +1,22 @@
+{% extends 'base_layout.html'%}
+{%block script%}
+
+{%endblock%}
+
+{% block title%}problems{%endblock%}
+
+
+
+{% block content%}
+
+<div class="content">
+    <h1>내 정보</h1>
+    <li>
+        {% if profile.univ is not None %}
+        <ul>대학교:{{profile.univ}}</ul>
+        {% endif%}
+        <ul>문제 점수:{{profile.problems_point}}</ul>
+        <ul>던전 탐험 점수:{{profile.dungeon_point}}</ul>
+    </li>
+</div>
+{%endblock%}
