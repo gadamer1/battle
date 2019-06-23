@@ -1,14 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 # Create your models here.
 
 
 
 
 class Reply(models.Model):
-    reply = models.OneToOneField(User,on_delete=models.CASCADE)
+    author = models.OneToOneField(User,on_delete=models.CASCADE)
     contents= models.CharField(max_length=200, default='')
     created_date = models.TimeField(auto_now_add=True)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return (self.author.username if self.author else "무명")+ "의 댓글"
 
 class Problems(models.Model):
     name = models.CharField(max_length=100,null=False)

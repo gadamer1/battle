@@ -1,5 +1,5 @@
 nav{
-    background-color: salmon;
+    background-color: crimson;
     margin: 0 auto;
     padding: 10px 10px;
 }
@@ -7,9 +7,128 @@ a {
     color: white;
     text-decoration: none;
 }
+
+h1 {
+    padding-top: 100px;
+    text-align: center;
+}
+
+h3 {
+    display: inline-table;
+}
+.content a {
+    color: black;
+}
+
 li {
-    display: inline-block;
+    display: inline-table;
 }
 ul {
     display: inline;
+}
+
+
+li.ranker {
+    display: grid;
+    text-align: center;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 300px;
+}
+
+
+li.problems a {
+    text-align: center;
+    padding: 100px 100px;
+    color: black;
+    border: solid;
+    border-radius: 0.4rem;
+}
+
+.problems form {
+    text-align: center;
+    display: inherit;
+    padding: 100px;
+    margin: 0 auto;
+}
+
+li.type {
+    margin-top: 180px;
+    display: flex;
+    padding: 100px 100px;
+}
+
+.korea a{
+    border: solid;
+    padding: 100px;
+    border-radius: 0.3rem;
+    border-color: crimson;
+}
+.yonsei a{
+    border: solid;
+    padding: 100px;
+    border-radius: 0.3rem;
+    border-color: blue;
+}
+.others a{
+    border: solid;
+    padding: 100px;
+    border-radius: 0.3rem;
+}
+
+.games {
+    padding-top: 100px;
+    text-align: center;
+}
+
+.login form {
+    margin: 100px;
+    text-align: center;
+}
+
+li.rank {
+    padding: 50px;
+}
+.content {
+    text-align: center;
+}
+
+form.form-signup {
+    padding: 100px;
+}
+
+span.helptext {
+    font-size: xx-small;
+    color: gray;
+}
+
+.helptext li{
+    display: -webkit-box;
+}
+
+.form form {
+    display: inline-grid;
+}
+
+
+.mypage ul {
+    margin: 100px;
+}
+
+li.mypage {
+    margin: 100px;
+}
+
+nav.pagination {
+    color: black;
+    background-color: snow;
+    text-align: center;
+}
+
+.problem ul {
+    display: block;
+    font-size: smaller;
+    color: gray;
 }

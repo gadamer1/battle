@@ -12,6 +12,10 @@ h1 {
     padding-top: 100px;
     text-align: center;
 }
+
+h3 {
+    display: inline-table;
+}
 .content a {
     color: black;
 }
@@ -106,4 +110,31 @@ span.helptext {
 
 .form form {
     display: inline-grid;
+}
+
+
+.mypage ul {
+    margin: 100px;
+}
+
+li.mypage {
+    margin: 100px;
+}
+
+nav.pagination {
+    color: black;
+    background-color: snow;
+    text-align: center;
+}
+
+.problem ul {
+    display: block;
+    font-size: smaller;
+    color: gray;
+}
+
+.col-sm-6{
+    display : flex;
+    flex-direction: row;
+    margin: auto;
 }

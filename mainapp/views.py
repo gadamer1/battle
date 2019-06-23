@@ -1,15 +1,54 @@
 from django.shortcuts import render,redirect
-from .models import Problems
+from .models import Problems,Reply
 from userauth.models import Profile
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import ProblemForm
+from .forms import ProblemForm,ReplyForm
 # Create your views here.
 
 
 def main(request):
+    comments = Reply.objects.all().order_by('created_date')
+    page = request.GET.get('page','1')
+    page = int(page)
+    num=10
+    paginator = Paginator(comments,num)
+    try:
+        p = paginator.page(page)
+    except PageNotAnInteger:
+        p = paginator.page(1)
+    except EmptyPage:
+        p = paginator.page(paginator.num_pages)
+    #if page's number smaller than 5
+    if paginator.num_pages < num:
+        num= paginator.num_pages
+    
+    start_index = 1
+    end_index = paginator.num_pages
+    if p.number>5:
+        start_index = p.number-5
+    if paginator.num_pages > p.number+5:
+        end_index = p.number+5   
+    page_range = range(start_index,end_index+1)
+
+
+
+
+
+    koreapoints = 0
+    yonseipoints =0
+    korea = Profile.objects.filter(category='korea')
+    for instance in korea:
+        koreapoints+=instance.problems_point + instance.dungeon_point
+    yonsei = Profile.objects.filter(category='yonsei')
+    
+    for instance in yonsei:
+        yonseipoints+=instance.problems_point + instance.dungeon_point
+
     if request.method =='POST':
         form = ProblemForm(request.POST)
+        reply_form = ReplyForm(request.POST)
         if form.is_valid():
             if form.cleaned_data['answer']=='V1hwT1YyRnNhM2xXYm5CcVpIb3dPUT09':
                 if 'cooooooorrrrrreeeeccctt' not in request.user.profile.problem_check:
@@ -18,18 +57,54 @@ def main(request):
                     request.user.profile.save()
                     return redirect('userauth:myuser')
                 else:
-                    return render(request,'mainapp/main/main.html',{'form':form,'alert':True})
+                    return render(request,'mainapp/main/main.html',{'form':form,'alert':True,'koreapoint':koreapoints
+    ,'yonseipoint':yonseipoints})
             else:
-                return render(request,'mainapp/main/main.html',{'form':form,'flag':True})
+                return render(request,'mainapp/main/main.html',{'form':form,'flag':True,'koreapoint':koreapoints
+    ,'yonseipoint':yonseipoints})
+        if reply_form.is_valid():
+            try:
+                instance = Reply.objects.get(author=request.user)
+                messages.warning(request,'응원은 한번만 하실 수 있습니다.')
+            except Reply.DoesNotExist:
+                instance = reply_form.save(commit=False)
+                instance.author = request.user
+                instance.publish()
     else:
         form = ProblemForm()
-    return render(request,'mainapp/main/main.html',{'form':form})
+        reply_form = ReplyForm()
+    
+    return render(request,'mainapp/main/main.html',{'form':form,'reply_form':reply_form,'koreapoint':koreapoints
+    ,'yonseipoint':yonseipoints,'comments':p, 'page_range': page_range,
+    'page_start_index':start_index,'page_end_index':end_index})
 
 
-@login_required(login_url ='login/login/')
+@login_required(login_url ='../login/login/')
 def problems_list(request):
     problems = Problems.objects.all().order_by('id')
-    return render(request,'mainapp/problems/problems_list.html',{'problems':problems})
+    page = request.GET.get('page','1')
+    page = int(page)
+    num=5
+    paginator = Paginator(problems,num)
+    try:
+        p = paginator.page(page)
+    except PageNotAnInteger:
+        p = paginator.page(1)
+    except EmptyPage:
+        p = paginator.page(paginator.num_pages)
+    #if page's number smaller than 5
+    if paginator.num_pages < num:
+        num= paginator.num_pages
+    
+    start_index = 1
+    end_index = paginator.num_pages
+    if p.number>5:
+        start_index = p.number-5
+    if paginator.num_pages > p.number+5:
+        end_index = p.number+5   
+    page_range = range(start_index,end_index+1)
+    return render(request,'mainapp/problems/problems_list.html',{'problems':p, 'page_range': page_range,
+    'page_start_index':start_index,'page_end_index':end_index})
 
 
 def problems(request ,problems_slug):
@@ -87,3 +162,10 @@ def ranking(request):
     'koreapoints':koreapoints,'yonseipoints':yonseipoints,'p_korea_ranker':p_korea_ranker,
     'd_korea_ranker':d_korea_ranker,'d_yonsei_ranker':d_yonsei_ranker,'p_yonsei_ranker':p_yonsei_ranker
     })
+
+
+def reply_delete(request, author_id):
+    return redirect('')
+
+def reply_update(request,author_id):
+    return redirect('')
