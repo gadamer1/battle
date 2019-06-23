@@ -7,7 +7,9 @@ a {
     color: white;
     text-decoration: none;
 }
-
+a:hover {
+    text-decoration: none;
+}
 h1 {
     padding-top: 100px;
     text-align: center;
@@ -137,4 +139,56 @@ nav.pagination {
     display : flex;
     flex-direction: row;
     margin: auto;
+}
+
+.comments {
+    padding: 100px;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.comment {
+    border: solid;
+}
+
+ul#author {
+    color: gray;
+    font-size: x-small;
+    position: relative;
+    padding-left: 0px;
+}
+
+ul#contents {
+    padding-left: 50px;
+}
+
+ul#created_date {
+    font-size: xx-small;
+    padding: 0px;
+}
+
+.comment {
+    border-radius: 0.3rem;
+    margin: 10px;
+    border: 0.05rem solid;
+    border-color: lightgray;
+}
+
+p.score {
+    font-size: larger;
+    padding: 50px 50px;
+    font-family: serif;
+}
+.comment.form {
+    text-align: center;
+}
+span  {
+    color: black;
+}
+span a{
+    color: blue
+}
+
+nav.pagination{
+    margin-left: 700px;
 }

@@ -1,4 +1,5 @@
 {% extends 'base_layout.html'%}
+{% load static%}
 {%block script%}
 
 {%endblock%}
@@ -8,24 +9,36 @@
 
 
 {% block content%}
-<h1>회원 가입</h1>
 <div class="content">
-    <li class="type">
-        <ul>
-            <div class="korea">
-                <a href="{%url 'userauth:korea' %}">고려대학교 학생</a>
-            </div>
-        </ul>
-        <ul>
-            <div class="yonsei">
-                <a href="{%url 'userauth:yonsei' %}">연세대학교 학생</a>
-            </div>
-        </ul>
-        <ul>
-            <div class="others">
-                <a href="{%url 'userauth:others' %}">일반인</a>
-            </div>
-        </ul>
-    </li>
-</div>
+        <h1>회원 가입</h1>
+          <li class="type">
+              <ul>
+                <div class="card" style="width: 20rem;">
+                  <img class="card-img-top" src="{%static '/img/game.png'%}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">고려대학생</h5>
+                    <a href="{%url 'userauth:korea' %}">회원가입</a>
+                  </div>
+                </div>
+              </ul>
+              <ul>
+                <div class="card" style="width: 20rem;">
+                  <img class="card-img-top" src="{%static '/img/victory_yonsei.jpg'%}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">연세대학생</h5>
+                    <a href="{%url 'userauth:yonsei' %}">회원가입</a>
+                  </div>
+                </div>
+              </ul>
+              <ul>
+                <div class="card" style="width: 20rem;">
+                  <img class="card-img-top" src="{%static '/img/seoul.png'%}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">일반인</h5>
+                    <a href="{%url 'userauth:others' %}">회원가입</a>
+                  </div>
+                </div>
+              </ul>
+          </li>
+      </div>
 {%endblock%}

@@ -17,43 +17,64 @@
 {% block content%}
 
 <div class="content">
-    <h1>사이버 연세대 고려대 교류전</h1>
-    <li>
-        <p>고려대 현재 총 {{koreapoint}}점</p>
-        <p>연세대 현재 총 {{yonseipoint}}점</p>
-        {% if koreapoint > yonseipoint %}
-        <ul><img src="{%static 'img/victory_korea'%}" alt="">현재 고려대가 우세합니다! </ul>
-        {%else%}
-        <ul><img src="{%static 'img/victory_yonsei'%}" alt="">현재 연세대가 우세합니다! </ul>
-        {%endif%}
-    </li>
-    <div class="games">
-        <div class="problems">
-            <li class="problems">        
-            <a href="{%url 'mainapp:problems_list' %}">문제들을 풀어봐요</a>
-            <form action="{%url 'mainapp:main'%}" method="POST">
-            <a href="https://gadamer1.pythonanywhere.com">던전을 빨리 클리어해주세요</a>
-            <p>보물코드 입력시 200p 획득</p>
-            {%csrf_token%}
-            {{form}}
-            <input type="submit" value="확인">
-            </form>
-            {% if flag %}
-            <div id="some_flag" title="Some Flag">
-                <p>틀렸습니다</p>
+    {% if user.profile.univ == 'korea'%}
+    <h1 style="background-image: url({%static 'img/first.png'%}); color:white;padding:150px;">고연전, 필승! 전승! 압승!</h1>
+    {%elif user.profile.univ == 'yonsei' %}
+    <h1 style="background-image: url({%static 'img/first.png'%}); color:white; padding:150px;">연고전, 올해도 승리</h1>
+    {% endif%}
+    <p class="score">연세대 현재 총 {{yonseipoint}}점</p>
+    <p class="score">고려대 현재 총 {{koreapoint}}점</p>
+    {%if koreapoint > yonseipoint%}
+    <img src="{%static 'img/victory_korea.png'%}" alt="">
+    <p>고려대 우세!</p>
+    {% else %}
+    <img src="{%static 'img/victory_yonsei.png'%}" alt="">
+    <p>연세대 우세!</p>
+    {%endif%}
+    
+        <div class="games">
+          <div class="container">
+              <div class="col-sm-6">
+                <div class="card" style="width: 40rem;">
+                        <a href="{%url 'mainapp:problems_list' %}">
+                  <img class="card-img-top" src="{%static 'img/with.jpg'%}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">문제를 풀어보아요!!</h5>
+                    <p class="card-text">당신의 두뇌회전을 자랑할 수 있는 시간입니다. 최대한 빨리 문제들을 풀어보아요!!</p>
+                  </div>
+                    </a>
+                </div>
+                
+                <div class="card" style="width: 40rem;">
+                    <a href="https://gadamer1.pythonanywhere.com">
+                  <img class="card-img-top" src="{%static 'img/dungeon.jpg'%}" alt="Card image cap">
+                  
+                  <div class="card-body">
+                    <h5 class="card-title">던전을 탐험해 보물코드를 얻자!!!</h5>
+                    <p class="card-text">상당한 난이도의 난관이 있어 자칫하면 빠져나가지 못할지도 모릅니다. 그래도 도전하시겠습니까?</p>
+                    </a>
+                  </div>
+                </div>
             </div>
-            {% endif %}
-            </li>
-            </div>
-            {% if alert%}
-            <div class="alert">
-                <p>두번 이상은 문제를 풀 수 없습니다.</p>
-            </div>
-            {% endif%}
-            </li>
+          </div>
         </div>
-    </div>
-
+        <form action="{%url 'mainapp:main'%}" method="POST">
+          <p>보물코드 입력시 200p 획득</p>
+          {%csrf_token%}
+          {{form}}
+          <input type="submit" value="확인">
+        </form>
+        {% if flag %}
+        <div id="some_flag" title="Some Flag">
+          <p>틀렸습니다</p>
+        </div>
+        {% endif %}
+        {% if alert%}
+        <div class="alert">
+          <p>두번 이상은 문제를 풀 수 없습니다.</p>
+        </div>
+        {% endif%}
+      </div>
     {% if user.is_authenticated%}
     <div class="comment form">
         <form action="{%url 'mainapp:main'%}" method="POST">
@@ -63,14 +84,17 @@
         </form>
     </div>
     {%endif%}
-    <h3>응원댓글달기</h3>
-    <div class="comment">
+    <div class="comments">
+            <h3>응원댓글달기</h3>
             {% for comment in comments%}
-            <ul>{{comment.author}}</ul>
-            <ul>{{comment.contents}}</ul>
-            <ul>{{comment.created_date}}</ul>
-            {%endfor%}
-        </div>
+            <div class="comment">
+                <li class="ss">
+                    <ul id="author">익명</ul>
+                    <ul id="created_date">{{comment.created_date}}</ul>
+                </li> 
+            <ul id="contents">{{comment.contents}}</ul>    
+            </div>
+            {%endfor%}      
     {# pagination #}
     <nav class="pagination">
         <ul class="pagination">
@@ -98,6 +122,7 @@
             </a>
             </li>
         {%endif%}
+    </div>
 </div>
 
 {%endblock%}

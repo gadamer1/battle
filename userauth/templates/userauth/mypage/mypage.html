@@ -11,18 +11,21 @@
 {% block content%}
 
 <div class="content">
-    <h1>내 정보</h1>
-    <li class="mypage">
-        
-        {% if profile.univ == 'korea' %}
-        <img src="{%static 'img/korea.png'%}" alt="" style="width: 300;">
-        <ul>대학교:{{profile.univ}}</ul>
-        {% elif profile.univ == 'yonsei' %}
-        <img src="{%static 'img/yonsei.png'%}" alt="" style="width: 300;">
-        <ul>대학교:{{profile.univ}}</ul>
-        {% endif%}
-        <ul>문제 점수:{{profile.problems_point}}</ul>
-        <ul>던전 탐험 점수:{{profile.dungeon_point}}</ul>
-    </li>
-</div>
+        <div class="container">
+            <div class="col-sm-6">
+              <div class="card" style="width: 40rem;">
+                {% if profile.univ == 'korea' %}
+                <img class="card-img-top" src="{%static 'img/korea.png'%}" alt="Card image cap" style="width:100%">
+                {% elif profile.univ == 'yonsei' %}
+                <img class="card-img-top" src="{%static 'img/yonsei.png'%}" alt="Card image cap" style="width:100%">
+                {%endif%}
+                <div class="card-body">
+                  <h5 class="card-title">점수</h5>
+                    <p class="card-text">문제 점수:{{profile.problems_point}}</p>
+                  <p class="card-text">던전 탐험 점수:{{profile.dungeon_point}}</p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
 {%endblock%}

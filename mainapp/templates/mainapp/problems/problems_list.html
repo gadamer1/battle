@@ -18,7 +18,7 @@
     {% for problem in problems %}
     <h3>{{problem.name}}.</p>
     <ul>
-    <a href="{%url 'mainapp:problems' problem.slug %}"><img src="{{problem.image.url}}" alt="이미지오류" style="width:100px"></a>
+    <a href="{%url 'mainapp:problems' problem.slug %}"><img src="{{problem.image.url}}" alt="이미지오류" style="width:300px"></a>
     </ul>
     {%endfor%}
     </li>

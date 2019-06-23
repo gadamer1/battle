@@ -9,7 +9,7 @@ from .forms import ProblemForm,ReplyForm
 
 
 def main(request):
-    comments = Reply.objects.all().order_by('created_date')
+    comments = Reply.objects.all().order_by('created_date').reverse()
     page = request.GET.get('page','1')
     page = int(page)
     num=10

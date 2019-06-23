@@ -45,7 +45,7 @@ def yonsei(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            if form.cleaned_data.get('email') in 'yonsei@ac.kr':
+            if '@yonsei.ac.kr' in form.cleaned_data.get('email'):
                 user = form.save()
                 user.refresh_from_db()  # load the profile instance created by the signal
                 user.profile.univ = 'yonsei'       
@@ -53,7 +53,7 @@ def yonsei(request):
                 raw_password = form.cleaned_data.get('password1')
                 user = authenticate(username=user.username, password=raw_password)
                 login(request, user)
-                return redirect('userauth:mypage')
+                return redirect('userauth:dummy_yonsei')
     else:
         form = SignUpForm()
     return render(request,'userauth/sign_up/yonsei.html',{'form':form})
@@ -89,7 +89,6 @@ def dummy_korea(request):
     request.user.profile.univ = 'korea'
     request.user.profile.category='korea'
     request.user.profile.save()
-    print(request.user.profile.univ)
     return redirect('userauth:mypage')
 
 

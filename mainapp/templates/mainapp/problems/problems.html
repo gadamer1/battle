@@ -15,7 +15,7 @@
 <div class="content">
     <div class="problem">
     <li>
-    <ul><img src="{{problems.image.url}}" alt="이미지오류" width="400px"></ul>
+    <ul><img src="{{problems.image.url}}" alt="이미지오류" width="500px"></ul>
     <ul>문제 점수:{{problems.points}}p</ul>
     <ul><form action="{%url 'mainapp:problems' problems.slug%}" method="POST">
         {%csrf_token%}

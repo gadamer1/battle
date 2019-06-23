@@ -93,6 +93,7 @@ li.rank {
 }
 .content {
     text-align: center;
+    font-family: auto;
 }
 
 form.form-signup {
